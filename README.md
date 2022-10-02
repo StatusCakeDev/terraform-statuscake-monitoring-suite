@@ -1,7 +1,13 @@
 # terraform-statuscake-monitoring-suite
 
-This README outlines the details of collaborating on this terraform
-configuration. A short introduction of this repo could easily go here.
+This repository implements a Terraform module to create a complete StatusCake
+monitoring suite for a specific website URL.
+
+It supports createing:
+
+ - An HTTP uptime check
+ - A Pagespeed check
+ - An SSL check
 
 ## Prerequisites
 
