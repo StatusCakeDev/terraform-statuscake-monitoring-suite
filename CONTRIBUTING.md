@@ -33,7 +33,8 @@ will be run to ensure changes do not break current functionality.
 Changes are more likely to be approve if they:
 
 - Include tests for new functionality,
-- Are accompanied with a [good commit message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
+- Are accompanied with a [good commit
+  message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
 - Contain few commits (preferably a single commit),
 - Do not contain merge commits,
 - Maintain backward compatibility.

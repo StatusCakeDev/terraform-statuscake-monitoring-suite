@@ -1,189 +1,122 @@
 variable "check_name" {
+  description = "The name of the checks created."
   type        = string
-  description = "Name of the checks created"
-}
-
-variable "website_url" {
-  type        = string
-  description = "URL of the website being monitored by the checks"
-}
-
-variable "paused" {
-  type        = bool
-  description = "Whether the checks should be run"
-  default     = false
 }
 
 variable "contact_groups" {
+  description = "A list of contact group IDs."
   type        = set(string)
-  description = "List of contact group IDs"
   default     = null
+}
+
+variable "pagespeed_config" {
+  description = <<EOF
+Configuration for the pagespeed check.
+
+(Optional) alert_bigger - An alert will be sent if the size of the page is larger than this value (kb). Disabled by default.
+(Optional) alert_slower - An alert will be sent if the load time of the page exceeds this value (ms). Disabled by default.
+(Optional) alert_smaller - An alert will be sent if the size of the page is smaller than this value (kb). Disabled by default.
+(Optional) check_interval - The number of seconds between pagespeed checks. Default value is 1800.
+(Optional) region - The region on which to run checks. Default value is `UK`.
+EOF
+  type = object({
+    alert_bigger   = optional(number, 0)
+    alert_slower   = optional(number, 0)
+    alert_smaller  = optional(number, 0)
+    check_interval = optional(number, 1800)
+    region         = optional(string, "UK")
+  })
+  default  = {}
+  nullable = false
+}
+
+variable "paused" {
+  description = "Whether the checks should be run."
+  type        = bool
+  default     = false
+}
+
+variable "ssl_config" {
+  description = <<EOF
+Configuration for the SSL check.
+
+(Optional) alert_at - A list representing when alerts should be sent (days). Must be exactly 3 numerical values. Defaults to [1, 7, 30].
+(Optional) check_interval - The number of seconds between SSL checks. Default value is 86400.
+(Optional) follow_redirects - Whether to follow redirects when testing. Disabled by default.
+(Optional) on_broken - Whether to enable alerts when SSL certificate issues are found. Enabled by default.
+(Optional) on_expiry - Whether to enable alerts when the SSL certificate is to expire. Enabled by default.
+(Optional) on_mixed - Whether to enable alerts when mixed content is found. Enabled by default.
+(Optional) on_reminder - Whether to enable alert reminders. Enabled by default.
+EOF
+  type = object({
+    alert_at         = optional(set(number), [1, 7, 30])
+    check_interval   = optional(number, 86400)
+    follow_redirects = optional(bool, false)
+    on_broken        = optional(bool, true)
+    on_expiry        = optional(bool, true)
+    on_mixed         = optional(bool, true)
+    on_reminder      = optional(bool, true)
+  })
+  default  = {}
+  nullable = false
+}
+
+variable "uptime_config" {
+  description = <<EOF
+Configuration for the uptime check.
+
+(Optional) check_interval - The number of seconds between uptime checks. Default value is 1800.
+(Optional) confirmation - The number of confirmation servers to confirm downtime before an alert is triggered. Default value is 2.
+(Optional) enable_cookies - Whether to enable cookie storage. Disabled by default.
+(Optional) final_endpoint - The URL upon where the redirect chain should end.
+(Optional) follow_redirects - Whether to follow redirects when testing. Disabled by default.
+(Optional) regions - A list of regions on which to run checks. The values required for this parameter can be retrieved from the `GET /v1/uptime-locations` endpoint.
+(Optional) request_headers - Represents headers to be sent when making requests.
+(Optional) request_method - The type of HTTP check. Default value is `HTTP`. Possible values are `HTTP` and `HEAD`.
+(Optional) request_payload - Payload submitted with the request. Setting this updates the check to use the HTTP POST verb. Only one of `request_payload` or `request_payload_raw` may be specified.
+(Optional) request_payload_raw - Raw payload submitted with the request. Setting this updates the check to use the HTTP POST verb. Only one of `request_payload` or `request_payload_raw` may be specified.
+(Optional) status_codes - A list of status codes that trigger an alert.
+(Optional) tags - A list of tags to apply to the check.
+(Optional) timeout - The number of seconds to wait for a response before timing out. Default value is 15.
+(Optional) trigger_rate - The number of minutes to wait before sending an alert.
+(Optional) validate_ssl - Whether to validate SSL certificates. Disabled by default.
+EOF
+  type = object({
+    check_interval      = optional(number, 1800)
+    confirmation        = optional(number, 2)
+    enable_cookies      = optional(bool, false)
+    final_endpoint      = optional(string)
+    follow_redirects    = optional(bool, false)
+    regions             = optional(set(string))
+    request_headers     = optional(map(string))
+    request_method      = optional(string, "HTTP")
+    request_payload     = optional(map(string))
+    request_payload_raw = optional(string)
+    status_codes        = optional(set(number))
+    tags                = optional(set(string))
+    timeout             = optional(number, 15)
+    trigger_rate        = optional(number)
+    validate_ssl        = optional(bool, false)
+  })
+  default  = {}
+  nullable = false
+  validation {
+    condition     = contains(["HTTP", "HEAD"], var.uptime_config.request_method)
+    error_message = "`request_method` must be either `HTTP` or `HEAD`."
+  }
+  validation {
+    condition     = var.uptime_config.request_payload != "" && var.uptime_config.request_payload_raw != ""
+    error_message = "Only one of `request_payload` or `request_payload_raw` may be specified."
+  }
 }
 
 variable "user_agent" {
+  description = "A custom user agent string set when testing."
   type        = string
-  description = "Custom user agent string set when testing"
-  default     = "StatusCake monitoring suite"
+  default     = null
 }
 
-variable "pagespeed_check_interval" {
-  type        = number
-  description = "Number of seconds between pagespeed checks"
-  default     = 1800
-}
-
-variable "pagespeed_region" {
+variable "website_url" {
+  description = "The URL of the website being monitored by the checks."
   type        = string
-  description = "Region on which to run checks"
-  default     = "UK"
-}
-
-variable "pagespeed_alert_bigger" {
-  type        = number
-  description = "An alert will be sent if the size of the page is larger than this value (kb)"
-  default     = 0
-}
-
-variable "pagespeed_alert_slower" {
-  type        = number
-  description = "An alert will be sent if the load time of the page exceeds this value (ms)"
-  default     = 0
-}
-
-variable "pagespeed_alert_smaller" {
-  type        = number
-  description = "An alert will be sent if the size of the page is smaller than this value (kb)"
-  default     = 0
-}
-
-variable "ssl_check_interval" {
-  type        = number
-  description = "Number of seconds between SSL checks"
-  default     = 86400
-}
-
-variable "ssl_follow_redirects" {
-  type        = bool
-  description = "Whether to follow redirects when testing"
-  default     = false
-}
-
-variable "ssl_alert_at" {
-  type        = set(number)
-  description = "List representing when alerts should be sent (days). Must be exactly 3 numerical values"
-  default     = [1, 7, 30]
-}
-
-variable "ssl_on_reminder" {
-  type        = bool
-  description = "Whether to enable alert reminders"
-  default     = true
-}
-
-variable "ssl_on_expiry" {
-  type        = bool
-  description = "Whether to enable alerts when the SSL certificate is to expire"
-  default     = true
-}
-
-variable "ssl_on_broken" {
-  type        = bool
-  description = "Whether to enable alerts when SSL certificate issues are found"
-  default     = true
-}
-
-variable "ssl_on_mixed" {
-  type        = bool
-  description = "Whether to enable alerts when mixed content is found"
-  default     = true
-}
-
-variable "uptime_check_interval" {
-  type        = number
-  description = "Number of seconds between HTTP checks"
-  default     = 1800
-}
-
-variable "uptime_confirmation" {
-  type        = number
-  description = "Number of confirmation servers to confirm downtime before an alert is triggered"
-  default     = 2
-}
-
-variable "uptime_trigger_rate" {
-  type        = number
-  description = "The number of minutes to wait before sending an alert"
-  default     = null
-}
-
-variable "uptime_enable_cookies" {
-  type        = bool
-  description = "Whether to enable cookie storage"
-  default     = true
-}
-
-variable "uptime_follow_redirects" {
-  type        = bool
-  description = "Whether to follow redirects when testing"
-  default     = false
-}
-
-variable "uptime_final_endpoint" {
-  type        = string
-  description = "Specify where the redirect chain should end"
-  default     = null
-}
-
-variable "uptime_timeout" {
-  type        = number
-  description = "The number of seconds to wait to receive the first byte"
-  default     = 15
-}
-
-variable "uptime_validate_ssl" {
-  type        = bool
-  description = "Whether to send an alert if the SSL certificate is soon to expire"
-  default     = false
-}
-
-variable "uptime_request_headers" {
-  type        = map(string)
-  description = "Represents headers to be sent when making requests"
-  default     = null
-}
-
-variable "uptime_request_method" {
-  type        = string
-  description = "Type of HTTP check. Either HTTP, or HEAD"
-  default     = "HTTP"
-}
-
-variable "uptime_request_payload" {
-  type        = map(string)
-  description = "Payload submitted with the request. Setting this updates the check to use the HTTP POST verb. Only one of `request_payload` or `request_payload_raw` may be specified"
-  default     = null
-}
-
-variable "uptime_request_payload_raw" {
-  type        = string
-  description = "Raw payload submitted with the request. Setting this updates the check to use the HTTP POST verb. Only one of `request_payload` or `request_payload_raw` may be specified"
-  default     = null
-}
-
-variable "uptime_status_codes" {
-  type        = set(string)
-  description = "List of status codes that trigger an alert"
-  default     = ["204", "205", "206", "303", "400", "401", "402", "403", "404", "405", "406", "408", "410", "413", "444", "429", "494", "495", "496", "499", "500", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "520", "521", "522", "523", "524", "598", "599"]
-}
-
-variable "uptime_regions" {
-  type        = list(string)
-  description = "List of regions on which to run checks. The values required for this parameter can be retrieved from the `GET /v1/uptime-locations` endpoint"
-  default     = null
-}
-
-variable "uptime_tags" {
-  type        = set(string)
-  description = "List of tags"
-  default     = null
 }
