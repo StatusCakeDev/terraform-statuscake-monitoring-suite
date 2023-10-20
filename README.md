@@ -1,4 +1,4 @@
-# terraform-statuscake-monitoring-suite ![policy](https://github.com/StatusCakeDev/terraform-statuscake-monitoring-suite/workflows/policy/badge.svg?event=push)
+# terraform-statuscake-monitoring-suite ![policy](https://github.com/StatusCakeDev/terraform-statuscake-monitoring-suite/workflows/policy/badge.svg)
 
 This repository implements a Terraform module to create a complete StatusCake
 monitoring suite for a specific website URL.
