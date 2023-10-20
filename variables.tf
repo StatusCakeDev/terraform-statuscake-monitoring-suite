@@ -16,14 +16,14 @@ Configuration for the pagespeed check.
 (Optional) alert_bigger - An alert will be sent if the size of the page is larger than this value (kb). Disabled by default.
 (Optional) alert_slower - An alert will be sent if the load time of the page exceeds this value (ms). Disabled by default.
 (Optional) alert_smaller - An alert will be sent if the size of the page is smaller than this value (kb). Disabled by default.
-(Optional) check_interval - The number of seconds between pagespeed checks. Default value is 1800.
+(Optional) check_interval - The number of seconds between pagespeed checks. Default value is 86400.
 (Optional) region - The region on which to run checks. Default value is `UK`.
 EOF
   type = object({
     alert_bigger   = optional(number, 0)
     alert_slower   = optional(number, 0)
     alert_smaller  = optional(number, 0)
-    check_interval = optional(number, 1800)
+    check_interval = optional(number, 86400)
     region         = optional(string, "UK")
   })
   default  = {}
