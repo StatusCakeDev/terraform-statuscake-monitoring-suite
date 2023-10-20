@@ -1,7 +1,3 @@
-locals {
-  status_codes = ["204", "205", "206", "303", "400", "401", "402", "403", "404", "405", "406", "408", "410", "413", "444", "429", "494", "495", "496", "499", "500", "501", "502", "503", "504", "505", "506", "507", "508", "509", "510", "511", "520", "521", "522", "523", "524", "598", "599"]
-}
-
 resource "statuscake_pagespeed_check" "pagespeed_check" {
   check_interval = var.pagespeed_config.check_interval
   contact_groups = var.contact_groups
@@ -58,7 +54,7 @@ resource "statuscake_uptime_check" "uptime_check" {
     request_method      = var.uptime_config.request_method
     request_payload     = var.uptime_config.request_payload
     request_payload_raw = var.uptime_config.request_payload_raw
-    status_codes        = coalesce(var.uptime_config.status_codes, local.status_codes)
+    status_codes        = var.uptime_config.status_codes
     timeout             = var.uptime_config.timeout
     user_agent          = var.user_agent
     validate_ssl        = var.uptime_config.validate_ssl
