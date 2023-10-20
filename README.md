@@ -67,7 +67,7 @@ No modules.
 | `pagespeed_config.alert_bigger` |  An alert will be sent if the size of the page is larger than this value (kb) | `number` | `0` | no |
 | `pagespeed_config.alert_slower` |  An alert will be sent if the load time of the page exceeds this value (ms) | `number` | `0` | no |
 | `pagespeed_config.alert_smaller` | An alert will be sent if the size of the page is smaller than this value (kb) | `number` | `0` | no |
-| `pagespeed_config.check_interval` | The number of seconds between pagespeed checks | `number` | `1800` | no |
+| `pagespeed_config.check_interval` | The number of seconds between pagespeed checks | `number` | `86400` | no |
 | `pagespeed_config.region` | The region on which to run checks | `string` | `UK` | no |
 | `paused` | Wheather the checks shoudl be run | `bool` | `false` | no |
 | `ssl_config` | Configuration for the SSL check | `object{...}` | `{}` | no |
