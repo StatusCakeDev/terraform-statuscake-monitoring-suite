@@ -1,40 +1,39 @@
 # How To Contribute
 
-Contributions are welcome as we strive to make this application as useful as
-possible for everyone. However time is not always on our side, and changes may
-not be reviewed or merged in a timely manner.
+Contributions are welcome as we strive to make this module as useful as possible
+for everyone. However time is not always on our side, and changes may not be
+reviewed or merged in a timely manner.
 
-If this application is found to be missing in functionality, please open an
-issue describing the proposed change - discussing changes ahead of time reduces
+If this module is found to be missing in functionality, please open an issue
+describing the proposed change - discussing changes ahead of time reduces
 friction within pull requests.
+
+## Prerequisites
+
+You will need the following things properly installed on your computer:
+
+- [Git](https://git-scm.com/)
+- [Terraform](https://www.terraform.io/) (1.0+)
+- [Make](https://en.wikipedia.org/wiki/Make_(software)) (optional)
+
+## Installation
+
+- `git clone <repository-url>` this repository
+- `cd statuscake-monitoring-suite`
+
+## Validating
+
+- `terraform validate`
+
+> **Note**
+> The equivalent `make` target to validate changes is as follows: `make
+> validate`. This additionally initialises the workspace.
 
 ## Making Changes
 
-Begin by creating a new branch. It is appreciated if branch names are written
-using kebab-case.
+For additional contributing guidelines visit
+[devhandbook.org](https://devhandbook.org/contributing)
 
-```bash
-git checkout master
-git pull --rebase
-git checkout -b my-new-feature
-```
+## Further Reading / Useful Links
 
-Make the desired change, and ensure both the linter and test suite continue to
-pass. Once this requirement is met push the change back to a fork of this
-repository.
-
-```bash
-git push -u origin my-new-feature
-```
-
-Finally open a pull request through the GitHub UI. Upon doing this the CI suite
-will be run to ensure changes do not break current functionality.
-
-Changes are more likely to be approve if they:
-
-- Include tests for new functionality,
-- Are accompanied with a [good commit
-  message](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html),
-- Contain few commits (preferably a single commit),
-- Do not contain merge commits,
-- Maintain backward compatibility.
+- [Terraform](https://www.terraform.io/)
