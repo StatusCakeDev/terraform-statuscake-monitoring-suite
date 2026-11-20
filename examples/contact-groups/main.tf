@@ -19,7 +19,7 @@ resource "statuscake_contact_group" "development_team" {
 # website, alerting both contact groups.
 module "monitoring_suite" {
   source      = "StatusCakeDev/monitoring-suite/statuscake"
-  version     = "0.1.0"
+  version     = "0.2.1"
   check_name  = "Google"
   website_url = "https://www.google.com"
 

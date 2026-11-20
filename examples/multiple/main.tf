@@ -18,7 +18,7 @@ locals {
 module "monitoring_suite" {
   for_each    = local.websites
   source      = "StatusCakeDev/monitoring-suite/statuscake"
-  version     = "0.1.0"
+  version     = "0.2.1"
   check_name  = each.key
   website_url = each.value.website_url
 
