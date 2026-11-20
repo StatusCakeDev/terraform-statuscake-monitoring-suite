@@ -39,13 +39,13 @@ module "monitoring_suite" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3 |
-| <a name="requirement_statuscake"></a> [statuscake](#requirement\_statuscake) | >= 2.1.0 |
+| <a name="requirement_statuscake"></a> [statuscake](#requirement\_statuscake) | >= 2.3.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_statuscake"></a> [statuscake](#provider\_statuscake) | >= 2.1.0 |
+| <a name="provider_statuscake"></a> [statuscake](#provider\_statuscake) | >= 2.3.0 |
 
 ## Resources
 
