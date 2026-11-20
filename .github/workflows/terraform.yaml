@@ -1,0 +1,21 @@
+---
+name: terraform
+on:
+  pull_request_target:
+  push:
+    branches:
+    - master
+jobs:
+  terraform-checks:
+    uses: StatusCakeDev/shared-workflows/.github/workflows/terraform.yaml@v1
+    concurrency:
+      group: terraform-${{ github.ref }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pull-requests: write
+      security-events: write
+    with:
+      enable-snyk: false
+      enable-report: ${{ github.event_name == 'pull_request' || github.event_name == 'pull_request_target' }}
+      tf-version: 1.14.0

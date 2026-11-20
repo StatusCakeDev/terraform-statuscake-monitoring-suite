@@ -1,0 +1,31 @@
+---
+formatter: markdown table
+version: ">= 0.20.0, < 0.21.0"
+header-from: main.tf
+content: |-
+  {{ if .Header -}}
+  {{ .Header }}
+
+  {{ end -}}
+  <!-- pyml disable md013,md022,md033 -->
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Resources }}
+
+  {{ .Inputs }}
+
+  {{ .Outputs }}
+  <!-- pyml enable md013,md022,md033 -->
+  {{- if .Footer }}
+
+  {{ .Footer }}
+  {{- end }}
+output:
+  file: README.md
+settings:
+  lockfile: false
+sort:
+  enabled: true
+  by: required
