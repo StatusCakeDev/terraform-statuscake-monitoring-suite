@@ -79,7 +79,7 @@ Configuration for the uptime check.
 (Optional) request_method - The type of HTTP check. Default value is `HTTP`. Possible values are `HTTP` and `HEAD`.
 (Optional) request_payload - Payload submitted with the request. Setting this updates the check to use the HTTP POST verb. Only one of `request_payload` or `request_payload_raw` may be specified.
 (Optional) request_payload_raw - Raw payload submitted with the request. Setting this updates the check to use the HTTP POST verb. Only one of `request_payload` or `request_payload_raw` may be specified.
-(Optional) status_codes - A list of status codes that trigger an alert.
+(Optional) status_codes - A list of status codes that trigger an alert. The default status codes are used if this is not set, and once set they cannot be restored by removing it.
 (Optional) tags - A list of tags to apply to the check.
 (Optional) timeout - The number of seconds to wait for a response before timing out. Default value is 15.
 (Optional) trigger_rate - The number of minutes to wait before sending an alert.
