@@ -27,7 +27,7 @@ module "monitoring_suite" {
     region         = lookup(each.value, "pagespeed_region", "UK")
   }
 
-  ssl_check = {
+  ssl_config = {
     check_interval = lookup(each.value, "ssl_check_interval", 86400)
     on_mixed       = lookup(each.value, "ssl_on_mixed", false)
   }
