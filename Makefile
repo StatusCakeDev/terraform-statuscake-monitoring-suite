@@ -44,6 +44,7 @@ format:
 .PHONY: test
 test:
 	@$(TFTEST) --recursive --skip-lint $(MODULE_DIR)
+	@$(TERRAFORM) test
 
 .PHONY: clean
 clean:
