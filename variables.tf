@@ -59,6 +59,10 @@ EOF
   })
   default  = {}
   nullable = false
+  validation {
+    condition     = length(var.ssl_config.alert_at) == 3
+    error_message = "`alert_at` must contain exactly 3 distinct values."
+  }
 }
 
 variable "uptime_config" {
