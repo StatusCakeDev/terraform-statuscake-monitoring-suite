@@ -105,7 +105,7 @@ EOF
     error_message = "`request_method` must be either `HTTP` or `HEAD`."
   }
   validation {
-    condition     = var.uptime_config.request_payload != "" && var.uptime_config.request_payload_raw != ""
+    condition     = var.uptime_config.request_payload == null || var.uptime_config.request_payload_raw == null
     error_message = "Only one of `request_payload` or `request_payload_raw` may be specified."
   }
 }
