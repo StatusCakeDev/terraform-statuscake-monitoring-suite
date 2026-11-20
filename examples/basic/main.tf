@@ -2,7 +2,7 @@
 # website.
 module "monitoring_suite" {
   source      = "StatusCakeDev/monitoring-suite/statuscake"
-  version     = "0.2.0"
+  version     = "0.2.1"
   check_name  = "Google"
   website_url = "https://www.google.com"
 
