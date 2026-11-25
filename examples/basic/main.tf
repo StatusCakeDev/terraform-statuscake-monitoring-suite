@@ -1,5 +1,5 @@
-# Create an HTTP uptime check, a pagespeed check, and an SSL check for each
-# website contained in the local `websites` variable.
+# Create an HTTP uptime check, a pagespeed check, and an SSL check for a single
+# website.
 module "monitoring_suite" {
   source      = "StatusCakeDev/monitoring-suite/statuscake"
   version     = "0.2.0"
