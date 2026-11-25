@@ -14,14 +14,13 @@ You will need the following things properly installed on your computer:
 
 - [Git](https://git-scm.com/)
 - [Terraform](https://www.terraform.io/) (1.0+)
-- [Make](https://en.wikipedia.org/wiki/Make_(software)) (optional)
 
 ## Installation
 
 - `git clone <repository-url>` this repository
-- `cd statuscake-monitoring-suite`
+- `cd terraform-statuscake-monitoring-suite`
 
-## Validating
+## Running Tests
 
 - `terraform validate`
 
